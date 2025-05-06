@@ -1,11 +1,13 @@
 # depslib dependency file v1.0
-1745544592 source:d:\universty\6st\computer graphics\snake game\main.cpp
+1746535083 source:d:\universty\6st\computer graphics\snake game\main.cpp
 	<GL/gl.h>
 	<GL/glut.h>
 	"game.h"
 	<stdlib.h>
 	<string.h>
 	<windows.h>
+	<cstdio>
+	<ctime>
 
 1301114764 c:\program files (x86)\codeblocks\mingw\include\gl\gl.h
 
@@ -231,14 +233,15 @@
 	<stddef.h>
 	<GL/gl.h>
 
-1745543598 d:\universty\6st\computer graphics\snake game\game.h
+1746532394 d:\universty\6st\computer graphics\snake game\game.h
 
-1745544057 source:d:\universty\6st\computer graphics\snake game\game.cpp
+1746532394 source:d:\universty\6st\computer graphics\snake game\game.cpp
 	<GL/gl.h>
 	<GL/glut.h>
 	<ctime>
-	"game.h"
 	<cmath>
 	<windows.h>
 	<mmsystem.h>
+	<cstdio>
+	"game.h"
 

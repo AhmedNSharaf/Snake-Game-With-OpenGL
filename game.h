@@ -8,12 +8,34 @@
 
 #define MAX 60
 
+#define EASY_FPS 5
+#define HARD_FPS 10
+
 void initGrid(int, int);
-void drawGrid();
-void unit(int, int);
-void drawSnack();
+void drawSnake();
 void drawFood();
-void drawSpecialFood(); // ✅ دالة رسم الطعام الخاص (النجمة)
-void random(int&, int&);
+void drawSpecialFood();
+void random(int &, int &);
+void loadHighScore();
+void saveHighScore();
+
+extern int score;
+extern int FPS;
+extern int highScore;
+extern bool gameOver;
+extern short snakDirection;
+extern bool isHardMode;
+
+extern int snakLenth;
+extern int posX[60];
+extern int posY[60];
+extern bool food;
+extern bool specialFood;
+extern int foodX;
+extern int foodY;
+extern int specialFoodX;
+extern int specialFoodY;
+extern int gridx;
+extern int gridy;
 
 #endif // GAME_H_INCLUDED
