@@ -10,6 +10,15 @@
 
 #define EASY_FPS 5
 #define HARD_FPS 10
+#define NUM_MENU_ITEMS 4
+
+// Game states
+enum GameState {
+    MENU,
+    PLAYING,
+    INSTRUCTIONS,
+    GAME_OVER
+};
 
 void initGrid(int, int);
 void drawSnake();
@@ -18,6 +27,9 @@ void drawSpecialFood();
 void random(int &, int &);
 void loadHighScore();
 void saveHighScore();
+void drawMenu();
+void drawInstructions();
+void resetGame();
 
 extern int score;
 extern int FPS;
@@ -37,5 +49,8 @@ extern int specialFoodX;
 extern int specialFoodY;
 extern int gridx;
 extern int gridy;
+
+extern GameState gameState;
+extern int selectedMenuItem;
 
 #endif // GAME_H_INCLUDED

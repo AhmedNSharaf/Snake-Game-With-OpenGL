@@ -21,6 +21,8 @@ bool specialFood = false;
 bool gameOver = false;
 bool isHardMode = false;
 short snakDirection = RIGHT;
+GameState gameState = MENU;
+int selectedMenuItem = 0;
 
 void initGrid(int x, int y)
 {
@@ -133,9 +135,18 @@ void random(int &x, int &y)
     int _maxX = gridx - 2;
     int _maxY = gridy - 2;
     int _min = 1;
-
-    x = _min + rand() % (_maxX - _min);
-    y = _min + rand() % (_maxY - _min);
+    bool valid = false;
+    while (!valid) {
+        x = _min + rand() % (_maxX - _min);
+        y = _min + rand() % (_maxY - _min);
+        valid = true;
+        for (int i = 0; i < snakLenth; i++) {
+            if (x == posX[i] && y == posY[i]) {
+                valid = false;
+                break;
+            }
+        }
+    }
 }
 
 void loadHighScore()
@@ -156,4 +167,77 @@ void saveHighScore()
         fprintf(file, "%d", highScore);
         fclose(file);
     }
+}
+
+void drawInstructions()
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(1.0, 1.0, 1.0);
+    float y = 35.0;
+    const char* instructions[] = {
+        "Snake Game Instructions",
+        "",
+        "Use arrow keys to move the snake.",
+        "Eat red food to grow and gain 1 point.",
+        "Eat yellow stars (every 5 points) for 5 points.",
+        "Press 'C' to toggle Easy/Hard mode.",
+        "Press 'R' to restart after game over.",
+        "",
+        "Press Enter to return to menu."
+    };
+
+    for (int i = 0; i < 9; i++) {
+        glRasterPos2f(10.0, y);
+        for (const char* c = instructions[i]; *c != '\0'; c++)
+            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, *c);
+        y -= 3.0;
+    }
+
+    glutSwapBuffers();
+}
+
+void resetGame()
+{
+    snakLenth = 5;
+    for (int i = 0; i < 5; i++) {
+        posX[i] = 20;
+        posY[i] = 20 - i;
+    }
+    snakDirection = RIGHT;
+    score = 0;
+    FPS = isHardMode ? HARD_FPS : EASY_FPS;
+    food = true;
+    specialFood = false;
+    gameOver = false;
+}
+
+void drawMenu()
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+    float y = 30.0;
+
+    const char* menuItems[] = {
+        "Start Game (Easy)",  // index 0
+        "Start Game (Hard)",  // index 1
+        "Instructions",       // index 2
+        "Exit"                // index 3
+    };
+
+    for (int i = 0; i < NUM_MENU_ITEMS; i++) {
+        // ضع اللون قبل raster position
+        if (i == selectedMenuItem) {
+            glColor3f(1.0, 1.0, 0.0); // Yellow
+        } else {
+            glColor3f(1.0, 1.0, 1.0); // White
+        }
+
+        glRasterPos2f(15.0, y);
+
+        for (const char* c = menuItems[i]; *c != '\0'; c++)
+            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *c);
+
+        y -= 3.0;
+    }
+
+    glutSwapBuffers();
 }
